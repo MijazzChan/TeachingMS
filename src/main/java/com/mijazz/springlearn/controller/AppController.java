@@ -2,7 +2,6 @@ package com.mijazz.springlearn.controller;
 
 import com.mijazz.springlearn.objects.Course;
 import com.mijazz.springlearn.service.CourseService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +9,6 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,23 +19,23 @@ import java.util.List;
 @Controller
 public class AppController {
 
-    @Resource
-    private CourseService courseService;
+//    @Resource
+//    private CourseService courseService;
 
     @RequestMapping(value = "/")
     public String index(){
         return "index";
     }
 
-    @RequestMapping(value = "/home")
-    public String home(Model model){
-        model.addAttribute("user", getUsername());
-        model.addAttribute("role", getAuthority());
-        Iterable<Course> courses = courseService.getall();
-        model.addAttribute("courses", courses);
-        model.addAttribute("coursecount", courses.spliterator().getExactSizeIfKnown());
-        return "home";
-    }
+//    @RequestMapping(value = "/home")
+//    public String home(Model model){
+//        model.addAttribute("user", getUsername());
+//        model.addAttribute("role", getAuthority());
+//        Iterable<Course> courses = courseService.getall();
+//        model.addAttribute("courses", courses);
+//        model.addAttribute("coursecount", courses.spliterator().getExactSizeIfKnown());
+//        return "home";
+//    }
 
     @RequestMapping(value = "/coursefile")
     public String coursefile(Model model){

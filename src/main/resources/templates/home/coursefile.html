@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
+    <title>Home</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+          name='viewport'/>
+    <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/assets/css/ready.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/demo.css}">
+</head>
+<body>
+<script>
+    function buttonsearch() {
+        var temp = document.getElementById("propertyselect").value;
+        var target = "/home/coursefile?property=" + temp;
+        window.location.href = target;
+    }
+</script>
+<div class="wrapper">
+    <div class="main-header">
+        <div class="logo-header">
+            <a class="logo" href="#">
+                现代教学管理系统
+            </a>
+            <button aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler sidenav-toggler ml-auto" data-target="collapse" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+    </div>
+    <div class="sidebar">
+        <div class="scrollbar-inner sidebar-wrapper">
+            <div class="user">
+                <div class="photo">
+                    <img src="/assets/img/profile.jpg">
+                </div>
+                <div class="info">
+                    <a aria-expanded="true" class="" data-toggle="collapse" href="#collapseExample">
+								<span>
+									<span th:text="${user}"></span>
+									<span class="user-level">
+										<span>学生</span>
+									</span>
+									<span class="caret"></span>
+								</span>
+                    </a>
+                    <div class="clearfix"></div>
+
+                    <div aria-expanded="true" class="collapse in" id="collapseExample" style="">
+                        <ul class="nav">
+                            <li>
+                                <a href="#profile">
+                                    <span class="link-collapse">My Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#edit">
+                                    <span class="link-collapse">Edit Profile</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#settings">
+                                    <span class="link-collapse">Settings</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <ul class="nav">
+                <li class="nav-item active">
+                    <a href="/home/index">
+                        <i class="la la-dashboard"></i>
+                        <p>课程表</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/home/coursefile?property=all">
+                        <i class="la la-cloud"></i>
+                        <p>课件下载</p>
+                        <span class="badge badge-count">14</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="forms.html">
+                        <i class="la la-keyboard-o"></i>
+                        <p>Forms</p>
+                        <span class="badge badge-count">50</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tables.html">
+                        <i class="la la-th"></i>
+                        <p>Tables</p>
+                        <span class="badge badge-count">6</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="notifications.html">
+                        <i class="la la-bell"></i>
+                        <p>Notifications</p>
+                        <span class="badge badge-success">3</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="typography.html">
+                        <i class="la la-font"></i>
+                        <p>Typography</p>
+                        <span class="badge badge-danger">25</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="icons.html">
+                        <i class="la la-fonticons"></i>
+                        <p>Icons</p>
+                    </a>
+                </li>
+                <a class="nav-item update-pro" href="/logout">
+                    <button data-target="/logout" data-toggle="modal">
+                        <i class="la la-hand-pointer-o"></i>
+                        <p>登出</p>
+                    </button>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="main-panel">
+        <div class="content">
+            <div class="container-fluid">
+                <h4 class="page-title">课件列表</h4>
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="form-group">
+                                <label for="propertyselect"></label>
+                                <select class="form-control input-pill" id="propertyselect" >
+                                    <option>all</option>
+                                    <option th:each="course:${courses}" th:text="${course.getCoursename()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="col">课件名</th>
+                                    <th class="col">课件号</th>
+                                    <th class="col">课件归属</th>
+                                    <th class="col">下载</th>
+                                </tr>
+                                </thead>
+                                <tbody id="tablebody">
+                                <tr th:each="cfile:${cfiles}">
+                                    <td th:text="${cfile.getCfilename()}"></td>
+                                    <td th:text="${cfile.getCfileid()}"></td>
+                                    <td th:text="${cfile.getCfileproperty()}"></td>
+                                    <td><a class="btn btn-round btn-success" th:href="${cfile.getCfilepath()}">下载</a> </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-action">
+                            <button class="btn btn-primary btn-lg btn-round" style="align-items: center" id="searchbtn" onclick="buttonsearch()">检索</button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <span>友情链接: </span>
+                <nav class="pull-left">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://www.zstu.edu.cn">
+                                浙江理工大学
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="http://sci.zstu.edu.cn/">
+                                浙江理工大学-理学院
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="copyright ml-auto">
+                    2019, <a href="https://www.github.com/MijazzChan">MijazzChan</a>,2017326603075, <a href="mailto:mijazzchen@gmail.com">MailMe</a>.
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+</div>
+</body>
+<script th:src="@{/assets/js/core/jquery.3.2.1.min.js}"></script>
+<script th:src="@{/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
+<script th:src="@{/assets/js/core/popper.min.js}"></script>
+<script th:src="@{/assets/js/core/bootstrap.min.js}"></script>
+<script th:src="@{/assets/js/plugin/chartist/chartist.min.js}"></script>
+<script th:src="@{/assets/js/plugin/chartist/plugin/chartist-plugin-tooltip.min.js}"></script>
+<!--script th:src="@{/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js}"></script>
+<script th:src="@{/assets/js/plugin/bootstrap-toggle/bootstrap-toggle.min.js}"></script>
+<!-->
+<script th:src="@{/assets/js/plugin/jquery-mapael/jquery.mapael.min.js}"></script>
+<script th:src="@{/assets/js/plugin/jquery-mapael/maps/world_countries.min.js}"></script>
+<script th:src="@{/assets/js/plugin/chart-circle/circles.min.js}"></script>
+<script th:src="@{/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
+<script th:src="@{/assets/js/ready.min.js}"></script>
+<script th:src="@{/assets/js/demo.js}"></script>
+
+</html>

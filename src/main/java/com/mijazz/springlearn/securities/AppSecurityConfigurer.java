@@ -44,8 +44,9 @@ public class AppSecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/login", "/css/**", "/js/**", "/img/**", "/font/**", "/assets/**").permitAll()
-                .antMatchers("/home", "/", "/coursefile").hasRole("USER")
+                .antMatchers("/home", "/", "/home/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/cfile/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").successHandler(appAuthenticationHandler)
