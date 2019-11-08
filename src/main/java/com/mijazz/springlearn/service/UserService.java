@@ -9,15 +9,27 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
     @Autowired
+    @Resource
     UserRepository userRepository;
+
+    public User findbyloginname(String loginname){
+        return userRepository.findByLoginname(loginname);
+    }
+
+    public void savebyloginname(User user){
+        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
+        userRepository.save(user);
+    }
 
     @Override
     public UserDetails loadUserByUsername(String loginname) throws UsernameNotFoundException {
@@ -32,6 +44,6 @@ public class UserService implements UserDetailsService {
             authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
+        return new org.springframework.security.core.userdetails.User(user.getLoginname(), user.getPassword(), authorities);
     }
 }

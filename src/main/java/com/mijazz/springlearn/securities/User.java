@@ -14,6 +14,24 @@ public class User implements Serializable {
     private String loginname;
     private String username;
     private String password;
+    private String gradeclass;
+    private String studentno;
+
+    public String getGradeclass() {
+        return gradeclass;
+    }
+
+    public void setGradeclass(String gradeclass) {
+        this.gradeclass = gradeclass;
+    }
+
+    public String getStudentno() {
+        return studentno;
+    }
+
+    public void setStudentno(String studentno) {
+        this.studentno = studentno;
+    }
 
     @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(name = "tb_user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})

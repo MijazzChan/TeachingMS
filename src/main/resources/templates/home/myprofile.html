@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-CN"
-	  xmlns="http://www.w3.org/1999/xhtml"
-	  xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
 >
 <head>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
@@ -37,7 +37,7 @@
                 <div class="info">
                     <a aria-expanded="true" class="" data-toggle="collapse" href="#collapseExample">
 								<span>
-									<span th:text="${user}"></span>
+									<span th:text="${user.getUsername()}"></span>
 									<span class="user-level">
 										<span>学生</span>
 									</span>
@@ -68,7 +68,7 @@
                     <a href="/home/index">
                         <i class="la la-dashboard"></i>
                         <p>课程表</p>
-                        <span class="badge badge-count" th:text="${coursecount}"></span>
+                        <span class="badge badge-count"></span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -124,24 +124,42 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <h4 class="page-title">课程表</h4>
+                <h4 class="page-title">我的信息</h4>
                 <div class="col-md-12">
                     <div class="card-body">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th class="col">课程名称</th>
-                                <th class="col">课程号</th>
-                                <th class="col">上课时间</th>
-                                <th class="col">上课地点</th>
-                            </tr>
-                            </thead>
+                        <table class="table table-typo">
                             <tbody>
-                            <tr th:each="course:${courses}">
-                                <td th:text="${course.getCoursename()}"></td>
-								<td th:text="${course.getCourseid()}"></td>
-                                <td th:text="${course.getCoursetime()}"></td>
-                                <td th:text="${course.getCourseplace()}"></td>
+                            <tr>
+                                <td>
+                                    <p>用户名</p>
+                                </td>
+                                <td>
+                                    <span class="h5 text-primary" th:text="${user.getUsername()}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>学号</p>
+                                </td>
+                                <td>
+                                    <span class="h5 text-primary" th:text="${user.getStudentno()}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                <p>班级</p>
+                                </td>
+                                <td>
+                                    <span class="h5 text-primary" th:text="${user.getGradeclass()}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>密码</p>
+                                </td>
+                                <td>
+                                    <a class="btn btn-round btn-primary" href="/home/editprofile">修改密码</a>
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -153,7 +171,7 @@
         </div>
         <footer class="footer">
             <div class="container-fluid">
-				<span>友情链接: </span>
+                <span>友情链接: </span>
                 <nav class="pull-left">
                     <ul class="nav">
                         <li class="nav-item">
@@ -169,8 +187,8 @@
                     </ul>
                 </nav>
                 <div class="copyright ml-auto">
-					2019, <a href="https://www.github.com/MijazzChan">MijazzChan</a>,2017326603075, <a href="mailto:mijazzchen@gmail.com">MailMe</a>.
-				</div>
+                    2019, <a href="https://www.github.com/MijazzChan">MijazzChan</a>,2017326603075, <a href="mailto:mijazzchen@gmail.com">MailMe</a>.
+                </div>
             </div>
         </footer>
     </div>
