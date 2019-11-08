@@ -2,6 +2,7 @@ package com.mijazz.springlearn.securities;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
 @Entity
 @Table(name = "tb_role")
 public class Role implements Serializable {
@@ -13,7 +14,7 @@ public class Role implements Serializable {
     @Column(name = "authority")
     private String authority;
 
-    public Role(){
+    public Role() {
         super();
     }
 

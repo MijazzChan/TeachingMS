@@ -5,6 +5,7 @@
   color: $white-color;
   position: relative;
   padding-left: 65px;
+
   [data-notify="icon"] {
     font-size: 30px;
     display: block;
@@ -13,13 +14,16 @@
     top: 50%;
     margin-top: -15px;
   }
+
   [data-notify="title"] {
     display: block;
     font-weight: bold;
   }
+
   [data-notify="message"] {
     font-size: 14px;
   }
+
   .close {
     background: rgba(255, 255, 255, 0.8);
     width: 25px;

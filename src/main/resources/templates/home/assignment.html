@@ -15,6 +15,13 @@
     <link rel="stylesheet" th:href="@{/assets/css/demo.css}">
 </head>
 <body>
+<script>
+    function buttonsearch() {
+        var temp = document.getElementById("propertyselect").value;
+        var target = "/home/assignment?property=" + temp;
+        window.location.href = target;
+    }
+</script>
 <div class="wrapper">
     <div class="main-header">
         <div class="logo-header">
@@ -69,14 +76,13 @@
                     <a href="/home/index">
                         <i class="la la-dashboard"></i>
                         <p>课程表</p>
-                        <span class="badge badge-count" th:text="${coursecount}"></span>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="/home/coursefile?property=all">
                         <i class="la la-cloud"></i>
                         <p>课件下载</p>
-                        <span class="badge badge-count">14</span>
+                        <span class="badge badge-count"></span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -125,57 +131,56 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <h4 class="page-title">课程表</h4>
-                <div class="col-md-12">
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th class="col">课程名称</th>
-                                <th class="col">课程号</th>
-                                <th class="col">上课时间</th>
-                                <th class="col">上课地点</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="course:${courses}">
-                                <td th:text="${course.getCoursename()}"></td>
-                                <td th:text="${course.getCourseid()}"></td>
-                                <td th:text="${course.getCoursetime()}"></td>
-                                <td th:text="${course.getCourseplace()}"></td>
-                            </tr>
-                            </tbody>
-                        </table>
+                <h4 class="page-title">作业列表</h4>
+                <select class="form-control input-pill" id="propertyselect">
+                    <option>all</option>
+                    <option th:each="course:${courses}" th:text="${course.getCoursename()}"></option>
+                </select>
+                <div class="row">
+                    <div class="col-md-12" id="Unit">
+                        <div class="card" th:each="unit:${assignments}">
+                            <div class="card-header">
+                                <h4 class="card-title" th:text="${unit.getAstitle()}"></h4>
+                                <p class="card-category" th:text="${unit.getAsproperty()}"></p>
+                            </div>
+                            <div class="card-action">
+                                <a class="btn btn-default btn-round" th:href="${unit.getAsdetail()}">作业描述</a>
+                                <button class="btn btn-info btn-round" onclick="uploadAssignment()">作业上传</button>
+                                <button class="btn btn-success" th:text="${unit.getAsdate()}"></button>
+                                <button class="btn btn-danger" th:text="${unit.getAsdeadline()}"></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-
+                <button class="btn btn-primary btn-lg btn-round" id="buttonsearch" onclick="buttonsearch()">检索</button>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container-fluid">
-                <span>友情链接: </span>
-                <nav class="pull-left">
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://www.zstu.edu.cn">
-                                浙江理工大学
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="http://sci.zstu.edu.cn/">
-                                浙江理工大学-理学院
-                            </a>
-                        </li>
-                    </ul>
-                </nav>
-                <div class="copyright ml-auto">
-                    2019, <a href="https://www.github.com/MijazzChan">MijazzChan</a>,2017326603075, <a
-                        href="mailto:mijazzchen@gmail.com">MailMe</a>.
-                </div>
-            </div>
-        </footer>
+
     </div>
+    <footer class="footer">
+        <div class="container-fluid">
+            <span>友情链接: </span>
+            <nav class="pull-left">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://www.zstu.edu.cn">
+                            浙江理工大学
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://sci.zstu.edu.cn/">
+                            浙江理工大学-理学院
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="copyright ml-auto">
+                2019, <a href="https://www.github.com/MijazzChan">MijazzChan</a>,2017326603075, <a
+                    href="mailto:mijazzchen@gmail.com">MailMe</a>.
+            </div>
+        </div>
+    </footer>
+</div>
 </div>
 </div>
 </body>

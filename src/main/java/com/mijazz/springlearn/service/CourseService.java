@@ -15,33 +15,33 @@ public class CourseService {
     private CourseRepository courseRepository;
 
     @Transactional
-    public void save(Course course){
+    public void save(Course course) {
         courseRepository.save(course);
     }
 
     @Transactional
-    public void saveall(List<Course> courses){
+    public void saveall(List<Course> courses) {
         courseRepository.saveAll(courses);
     }
 
     @Transactional
-    public void delete(long id){
+    public void delete(long id) {
         courseRepository.deleteById(id);
     }
 
     @Transactional
-    public Iterable<Course> getall(){
+    public Iterable<Course> getall() {
         return courseRepository.findAll();
     }
 
     @Transactional
-    public Course getbyid(long id){
+    public Course getbyid(long id) {
         Optional<Course> optionalCourse = courseRepository.findById(id);
         return optionalCourse.get();
     }
 
     @Transactional
-    public void update(Course course){
+    public void update(Course course) {
         courseRepository.updatecourse(course.getCourseid(), course.getCoursename(), course.getCoursetime(), course.getCourseplace());
     }
 }

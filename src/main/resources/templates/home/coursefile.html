@@ -29,7 +29,8 @@
                 现代教学管理系统
             </a>
             <button aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation"
-                    class="navbar-toggler sidenav-toggler ml-auto" data-target="collapse" data-toggle="collapse" type="button">
+                    class="navbar-toggler sidenav-toggler ml-auto" data-target="collapse" data-toggle="collapse"
+                    type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -85,10 +86,10 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="forms.html">
+                    <a href="/home/assignment?property=all">
                         <i class="la la-keyboard-o"></i>
-                        <p>Forms</p>
-                        <span class="badge badge-count">50</span>
+                        <p>作业</p>
+                        <span class="badge badge-count"></span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -136,7 +137,7 @@
                         <div class="card-header">
                             <div class="form-group">
                                 <label for="propertyselect"></label>
-                                <select class="form-control input-pill" id="propertyselect" >
+                                <select class="form-control input-pill" id="propertyselect">
                                     <option>all</option>
                                     <option th:each="course:${courses}" th:text="${course.getCoursename()}"></option>
                                 </select>
@@ -157,13 +158,16 @@
                                     <td th:text="${cfile.getCfilename()}"></td>
                                     <td th:text="${cfile.getCfileid()}"></td>
                                     <td th:text="${cfile.getCfileproperty()}"></td>
-                                    <td><a class="btn btn-round btn-success" th:href="${cfile.getCfilepath()}">下载</a> </td>
+                                    <td><a class="btn btn-round btn-success" th:href="${cfile.getCfilepath()}">下载</a>
+                                    </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                         <div class="card-action">
-                            <button class="btn btn-primary btn-lg btn-round" style="align-items: center" id="searchbtn" onclick="buttonsearch()">检索</button>
+                            <button class="btn btn-primary btn-lg btn-round" id="searchbtn" onclick="buttonsearch()"
+                                    style="align-items: center">检索
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -189,7 +193,8 @@
                     </ul>
                 </nav>
                 <div class="copyright ml-auto">
-                    2019, <a href="https://www.github.com/MijazzChan">MijazzChan</a>,2017326603075, <a href="mailto:mijazzchen@gmail.com">MailMe</a>.
+                    2019, <a href="https://www.github.com/MijazzChan">MijazzChan</a>,2017326603075, <a
+                        href="mailto:mijazzchen@gmail.com">MailMe</a>.
                 </div>
             </div>
         </footer>

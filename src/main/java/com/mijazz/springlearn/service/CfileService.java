@@ -14,22 +14,22 @@ public class CfileService {
     private CfileRepository cfileRepository;
 
     @Transactional
-    public void save(Cfile cfile){
+    public void save(Cfile cfile) {
         cfileRepository.save(cfile);
     }
 
     @Transactional
-    public void saveall(List<Cfile> cfiles){
+    public void saveall(List<Cfile> cfiles) {
         cfileRepository.saveAll(cfiles);
     }
 
     @Transactional
-    public Iterable<Cfile> getall(){
+    public Iterable<Cfile> getall() {
         return cfileRepository.findAll();
     }
 
     @Transactional
-    public Iterable<Cfile> getbyproperty(String property){
+    public Iterable<Cfile> getbyproperty(String property) {
         return cfileRepository.findByCfileproperty(property);
     }
 }

@@ -16,12 +16,14 @@
     position: absolute;
     left: -9999px;
   }
+
   &:not(:checked) + .form-check-sign, &:checked + .form-check-sign {
     position: relative;
     padding-left: 1.65em;
     color: #777;
     cursor: pointer;
   }
+
   &:not(:checked) + .form-check-sign:before, &:checked + .form-check-sign:before {
     content: '';
     position: absolute;
@@ -33,6 +35,7 @@
     background: $transparent-bg;
     border-radius: 4px;
   }
+
   &:not(:checked) + .form-check-sign:after, &:checked + .form-check-sign:after {
     content: "\f17b";
     display: inline-block;
@@ -48,37 +51,45 @@
     transition: all .2s;
     font-family: LineAwesome;
   }
+
   &:not(:checked) + .form-check-sign:after {
     opacity: 0;
     transform: scale(0);
   }
+
   &:checked + .form-check-sign {
     &:after {
       opacity: 1;
       transform: scale(1);
     }
+
     font-weight: 700;
   }
+
   &:disabled {
     &:not(:checked) + .form-check-sign:before {
       box-shadow: none;
       border-color: #bbb;
       background-color: #ddd;
     }
+
     &:checked + .form-check-sign {
       &:before {
         box-shadow: none;
         border-color: #bbb;
         background-color: #ddd;
       }
+
       &:after {
         color: #999;
       }
     }
+
     + .form-check-sign {
       color: #aaa;
     }
   }
+
   &:checked:focus + .form-check-sign:before, &:not(:checked):focus + .form-check-sign:before {
     border: 1px solid #ccc;
   }
@@ -112,12 +123,14 @@
     position: absolute;
     left: -9999px;
   }
+
   &:not(:checked) + .form-radio-sign, &:checked + .form-radio-sign {
     position: relative;
     padding-left: 1.65em;
     color: #777;
     cursor: pointer;
   }
+
   &:not(:checked) + .form-radio-sign:before {
     content: "\f18a";
     font-size: 22px;
@@ -128,6 +141,7 @@
     background: $transparent-bg;
     line-height: 1;
   }
+
   &:checked + .form-radio-sign:before {
     content: "\f18a";
     font-size: 22px;
@@ -139,6 +153,7 @@
     line-height: 1;
     display: none;
   }
+
   &:not(:checked) + .form-radio-sign:after, &:checked + .form-radio-sign:after {
     content: "\f1bc";
     position: absolute;
@@ -151,36 +166,44 @@
     line-height: 1;
     font-family: LineAwesome;
   }
+
   &:not(:checked) + .form-radio-sign:after {
     opacity: 0;
     transform: scale(0);
   }
+
   &:checked + .form-radio-sign {
     &:after {
       opacity: 1;
       transform: scale(1);
     }
+
     font-weight: 700;
   }
+
   &:disabled {
     &:not(:checked) + .form-radio-sign:before {
       box-shadow: none;
       opacity: 0.65;
     }
+
     &:checked + .form-radio-sign {
       &:before {
         box-shadow: none;
         opacity: 0.65;
       }
+
       &:after {
         opacity: 0.65;
       }
     }
+
     + .form-radio-sign {
       color: #aaa;
       opacity: 0.65;
     }
   }
+
   &:checked:focus + .form-radio-sign:before, &:not(:checked):focus + .form-radio-sign:before {
     border: 1px solid #ccc;
   }
@@ -261,24 +284,29 @@
     border-radius: .25rem;
     border: 1px solid #ced4da;
   }
+
   &.has-success, &.has-icon.has-success {
     border-color: 1px solid $success-color !important;
     color: $success-color;
   }
+
   &.has-error {
     border: 1px solid $danger-color !important;
     color: $danger-color;
   }
+
   &.has-icon {
     &.has-error {
       border: 1px solid $danger-color !important;
       color: $danger-color;
     }
+
     .form-control {
       border-radius: .25rem;
       border: 0px;
       position: relative;
     }
+
     .input-group-icon {
       background: $transparent-bg;
       border: 0px;
@@ -304,6 +332,7 @@
     background: #e8e8e8 !important;
     border-color: #e8e8e8 !important;
   }
+
   &:disabled, &[readonly] {
     opacity: 0.6 !important;
   }

@@ -1,7 +1,6 @@
 package com.mijazz.springlearn.objects;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 @Entity
 @Table(name = "tb_cfile")

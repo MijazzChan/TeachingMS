@@ -15,6 +15,13 @@ import java.util.List;
 
 @Component
 public class AppAuthenticationHandler extends SimpleUrlAuthenticationSuccessHandler {
+    private RedirectStrategy redirectStrategy = new RedirectStrategy() {
+        @Override
+        public void sendRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String s) throws IOException {
+            httpServletResponse.sendRedirect(s);
+        }
+    };
+
     @Override
     public RedirectStrategy getRedirectStrategy() {
         return redirectStrategy;
@@ -24,13 +31,6 @@ public class AppAuthenticationHandler extends SimpleUrlAuthenticationSuccessHand
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
-
-    private RedirectStrategy redirectStrategy = new RedirectStrategy() {
-        @Override
-        public void sendRedirect(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, String s) throws IOException {
-            httpServletResponse.sendRedirect(s);
-        }
-    };
 
     @Override
     protected void handle(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
@@ -47,26 +47,26 @@ public class AppAuthenticationHandler extends SimpleUrlAuthenticationSuccessHand
             roles.add(authority.getAuthority());
         }
 
-        if (isAdmin(roles)){
+        if (isAdmin(roles)) {
             target = "/admin";
-        }else if(isUser(roles)){
+        } else if (isUser(roles)) {
             target = "/home/index";
         }
         return target;
     }
 
     private boolean isUser(List<String> roles) {
-        if (roles.contains("ROLE_USER")){
+        if (roles.contains("ROLE_USER")) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
     private boolean isAdmin(List<String> roles) {
-        if (roles.contains("ROLE_ADMIN")){
+        if (roles.contains("ROLE_ADMIN")) {
             return true;
-        }else {
+        } else {
             return false;
         }
     }

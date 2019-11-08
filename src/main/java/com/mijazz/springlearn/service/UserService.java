@@ -22,11 +22,12 @@ public class UserService implements UserDetailsService {
     @Resource
     UserRepository userRepository;
 
-    public User findbyloginname(String loginname){
+    public User findbyloginname(String loginname) {
         return userRepository.findByLoginname(loginname);
     }
 
-    public void savebyloginname(User user){
+    public void savebyloginname(User user) {
+        System.out.println(user.getPassword());
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -34,7 +35,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String loginname) throws UsernameNotFoundException {
         User user = userRepository.findByLoginname(loginname);
-        if (user == null){
+        if (user == null) {
             throw new UsernameNotFoundException("Non-Exist User");
         }
 

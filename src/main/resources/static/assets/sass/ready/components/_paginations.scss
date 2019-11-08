@@ -9,6 +9,7 @@
       border-color: #ddd;
     }
   }
+
   &.pg-primary > li.active {
     > a, &:first-child > a, &:last-child > a, > span, &:first-child > span, &:last-child > span {
       background: $primary-color;
@@ -16,6 +17,7 @@
       color: $white-color;
     }
   }
+
   &.pg-info > li.active {
     > a, &:first-child > a, &:last-child > a, > span, &:first-child > span, &:last-child > span {
       background: $info-color;
@@ -23,6 +25,7 @@
       color: $white-color;
     }
   }
+
   &.pg-success > li.active {
     > a, &:first-child > a, &:last-child > a, > span, &:first-child > span, &:last-child > span {
       background: $success-color;
@@ -30,6 +33,7 @@
       color: $white-color;
     }
   }
+
   &.pg-warning > li.active {
     > a, &:first-child > a, &:last-child > a, > span, &:first-child > span, &:last-child > span {
       background: $warning-color;
@@ -37,6 +41,7 @@
       color: $white-color;
     }
   }
+
   &.pg-danger > li.active {
     > a, &:first-child > a, &:last-child > a, > span, &:first-child > span, &:last-child > span {
       background: $danger-color;
@@ -44,6 +49,7 @@
       color: $white-color;
     }
   }
+
   &.pg-default > li.active {
     > a, &:first-child > a, &:last-child > a, > span, &:first-child > span, &:last-child > span {
       background: $default-color;

@@ -32,6 +32,7 @@
       text-align: left;
       text-anchor: start;
     }
+
     &.ct-end {
       -webkit-box-align: flex-start;
       -webkit-align-items: flex-start;
@@ -45,6 +46,7 @@
       text-anchor: start;
     }
   }
+
   &.ct-vertical {
     &.ct-start {
       -webkit-box-align: flex-end;
@@ -58,6 +60,7 @@
       text-align: right;
       text-anchor: end;
     }
+
     &.ct-end {
       -webkit-box-align: flex-end;
       -webkit-align-items: flex-end;
@@ -87,6 +90,7 @@
       text-align: center;
       text-anchor: start;
     }
+
     &.ct-end {
       -webkit-box-align: flex-start;
       -webkit-align-items: flex-start;
@@ -100,6 +104,7 @@
       text-anchor: start;
     }
   }
+
   &.ct-horizontal-bars .ct-label {
     &.ct-horizontal {
       &.ct-start {
@@ -114,6 +119,7 @@
         text-align: left;
         text-anchor: start;
       }
+
       &.ct-end {
         -webkit-box-align: flex-start;
         -webkit-align-items: flex-start;
@@ -127,6 +133,7 @@
         text-anchor: start;
       }
     }
+
     &.ct-vertical {
       &.ct-start {
         -webkit-box-align: center;
@@ -140,6 +147,7 @@
         text-align: right;
         text-anchor: end;
       }
+
       &.ct-end {
         -webkit-box-align: center;
         -webkit-align-items: center;
@@ -195,6 +203,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #1D62F0;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #1D62F0;
   }
@@ -204,6 +213,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #ff646d;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #ff646d;
   }
@@ -213,6 +223,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #fbad4c;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #fbad4c;
   }
@@ -222,6 +233,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #9368E9;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #9368E9;
   }
@@ -231,6 +243,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #87CB16;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #87CB16;
   }
@@ -240,6 +253,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #59922b;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #59922b;
   }
@@ -249,6 +263,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #0544d3;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #0544d3;
   }
@@ -258,6 +273,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #6b0392;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #6b0392;
   }
@@ -267,6 +283,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #f05b4f;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #f05b4f;
   }
@@ -276,6 +293,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #dda458;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #dda458;
   }
@@ -285,6 +303,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #eacf7d;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #eacf7d;
   }
@@ -294,6 +313,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #86797d;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #86797d;
   }
@@ -303,6 +323,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #b2c326;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #b2c326;
   }
@@ -312,6 +333,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #6188e2;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #6188e2;
   }
@@ -321,6 +343,7 @@
   .ct-point, .ct-line, .ct-bar, .ct-slice-donut {
     stroke: #a748ca;
   }
+
   .ct-slice-pie, .ct-slice-donut-solid, .ct-area {
     fill: #a748ca;
   }
@@ -330,6 +353,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -338,11 +362,13 @@
     height: 0;
     padding-bottom: 100%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -355,6 +381,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -363,11 +390,13 @@
     height: 0;
     padding-bottom: 93.75%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -380,6 +409,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -388,11 +418,13 @@
     height: 0;
     padding-bottom: 88.8888888889%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -405,6 +437,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -413,11 +446,13 @@
     height: 0;
     padding-bottom: 83.3333333333%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -430,6 +465,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -438,11 +474,13 @@
     height: 0;
     padding-bottom: 80%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -455,6 +493,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -463,11 +502,13 @@
     height: 0;
     padding-bottom: 75%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -480,6 +521,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -488,11 +530,13 @@
     height: 0;
     padding-bottom: 66.6666666667%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -505,6 +549,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -513,11 +558,13 @@
     height: 0;
     padding-bottom: 62.5%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -530,6 +577,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -538,11 +586,13 @@
     height: 0;
     padding-bottom: 61.804697157%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -555,6 +605,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -563,11 +614,13 @@
     height: 0;
     padding-bottom: 60%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -580,6 +633,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -588,11 +642,13 @@
     height: 0;
     padding-bottom: 56.25%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -605,6 +661,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -613,11 +670,13 @@
     height: 0;
     padding-bottom: 53.3333333333%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -630,6 +689,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -638,11 +698,13 @@
     height: 0;
     padding-bottom: 50%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -655,6 +717,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -663,11 +726,13 @@
     height: 0;
     padding-bottom: 40%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -680,6 +745,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -688,11 +754,13 @@
     height: 0;
     padding-bottom: 37.5%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -705,6 +773,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -713,11 +782,13 @@
     height: 0;
     padding-bottom: 33.3333333333%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -730,6 +801,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -738,11 +810,13 @@
     height: 0;
     padding-bottom: 25%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   > svg {
     display: block;
     position: absolute;
@@ -767,6 +841,7 @@
   -moz-transition: opacity .2s linear;
   -o-transition: opacity .2s linear;
   transition: opacity .2s linear;
+
   &:before {
     content: "";
     position: absolute;

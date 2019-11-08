@@ -16,6 +16,9 @@ public class User implements Serializable {
     private String password;
     private String gradeclass;
     private String studentno;
+    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
+    @JoinTable(name = "tb_user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private List<Role> roles;
 
     public String getGradeclass() {
         return gradeclass;
@@ -32,10 +35,6 @@ public class User implements Serializable {
     public void setStudentno(String studentno) {
         this.studentno = studentno;
     }
-
-    @ManyToMany(cascade = {CascadeType.REFRESH}, fetch = FetchType.EAGER)
-    @JoinTable(name = "tb_user_role", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "role_id")})
-    private List<Role> roles;
 
     public long getId() {
         return id;

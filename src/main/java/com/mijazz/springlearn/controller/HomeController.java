@@ -1,14 +1,11 @@
 package com.mijazz.springlearn.controller;
 
-import com.mijazz.springlearn.objects.Cfile;
 import com.mijazz.springlearn.objects.Course;
 import com.mijazz.springlearn.securities.User;
+import com.mijazz.springlearn.service.AssignmentService;
 import com.mijazz.springlearn.service.CfileService;
 import com.mijazz.springlearn.service.CourseService;
 import com.mijazz.springlearn.service.UserService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.springframework.data.repository.query.Param;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +29,11 @@ public class HomeController {
     @Resource
     private UserService userService;
 
+    @Resource
+    private AssignmentService assignmentService;
+
     @RequestMapping(value = "/home/index")
-    public String homeindex(Model model){
+    public String homeindex(Model model) {
         model.addAttribute("user", getUsername());
         model.addAttribute("role", getAuthority());
         Iterable<Course> courses = courseService.getall();
@@ -45,19 +43,31 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/home/coursefile")
-    public String coursefile(@RequestParam("property")String property,  Model model){
+    public String coursefile(@RequestParam("property") String property, Model model) {
         model.addAttribute("user", getUsername());
         model.addAttribute("courses", courseService.getall());
-        if (property == null || property.equals("all")){
+        if (property == null || property.equals("all")) {
             model.addAttribute("cfiles", cfileService.getall());
-        }else if (property != null){
+        } else if (property != null) {
             model.addAttribute("cfiles", cfileService.getbyproperty(property));
         }
         return "/home/coursefile";
     }
 
+    @RequestMapping(value = "/home/assignment")
+    public String assignmentpage(@RequestParam("property") String property, Model model) {
+        model.addAttribute("user", getUsername());
+        model.addAttribute("courses", courseService.getall());
+        if (property == null || property.equals("all")) {
+            model.addAttribute("assignments", assignmentService.getall());
+        } else if (property != null) {
+            model.addAttribute("assignments", assignmentService.getbyproperty(property));
+        }
+        return "/home/assignment";
+    }
+
     @RequestMapping(value = "/home/myprofile")
-    public String myprofile(Principal principal, Model model){
+    public String myprofile(Principal principal, Model model) {
         String sessionUser = getUsername();
         User sessionUserInstance = userService.findbyloginname(sessionUser);
         model.addAttribute("user", sessionUserInstance);
@@ -65,7 +75,7 @@ public class HomeController {
     }
 
     @GetMapping(value = "/home/editprofile")
-    public String editprofile(Principal principal, Model model){
+    public String editprofile(Principal principal, Model model) {
         String sessionUser = getUsername();
         User sessionUserInstance = userService.findbyloginname(sessionUser);
         model.addAttribute("user", sessionUserInstance);
@@ -73,26 +83,28 @@ public class HomeController {
     }
 
     @PostMapping(value = "/home/editprofile")
-    public String editAjax(@RequestBody User user, HttpServletRequest request, HttpServletResponse response){
-        if (user == null){
-            response.setStatus(500);
-            return "null";
+    @ResponseBody
+    public String editAjax(@RequestBody User user) {
+        if (user.getUsername() == null || user.getUsername().trim().length() == 0) {
+            return "非法请求";
         }
-        response.setStatus(200);
-        String sessionUser = getUsername();
-        User sessionUserInstance = userService.findbyloginname(sessionUser);
+        if (user.getPassword() == null || user.getPassword().trim().length() == 0) {
+            return "非法请求";
+        }
+        String loginname = getUsername();
+        User sessionUserInstance = userService.findbyloginname(loginname);
         sessionUserInstance.setUsername(user.getUsername());
+        System.out.println(user.toString());
         sessionUserInstance.setPassword(user.getPassword());
         userService.savebyloginname(sessionUserInstance);
-        return "success";
+        return "修改成功";
     }
-
 
 
     private String getAuthority() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = new ArrayList<String>();
-        for (GrantedAuthority a : authentication.getAuthorities()){
+        for (GrantedAuthority a : authentication.getAuthorities()) {
             roles.add(a.getAuthority());
         }
 

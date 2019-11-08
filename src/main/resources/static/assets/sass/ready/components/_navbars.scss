@@ -11,6 +11,7 @@
   font-size: 14px;
   font-weight: $font-weight-mediumbold;
   text-align: center;
+
   i {
     font-size: 22px;
     width: 30px;
@@ -44,8 +45,10 @@
 
 .navbar-header {
   padding: 0px 15px;
+
   .dropdown-toggle {
     line-height: 55px;
+
     &::after {
       margin-left: 0;
     }
@@ -71,6 +74,7 @@
   .img-circle {
     border-radius: 50%;
   }
+
   span {
     font-size: 14px;
     font-weight: $font-weight-bold;

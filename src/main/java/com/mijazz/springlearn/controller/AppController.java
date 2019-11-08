@@ -1,7 +1,5 @@
 package com.mijazz.springlearn.controller;
 
-import com.mijazz.springlearn.objects.Course;
-import com.mijazz.springlearn.service.CourseService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
@@ -23,8 +20,8 @@ public class AppController {
 //    private CourseService courseService;
 
     @RequestMapping(value = "/")
-    public String index(){
-        return "index";
+    public String index() {
+        return "redirect:/home";
     }
 
 //    @RequestMapping(value = "/home")
@@ -37,35 +34,29 @@ public class AppController {
 //        return "home";
 //    }
 
-    @RequestMapping(value = "/coursefile")
-    public String coursefile(Model model){
-        model.addAttribute("user", getUsername());
-        return "coursefile";
-    }
-
     @RequestMapping(value = "/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
     @RequestMapping(value = "/admin")
-    public String admin(Model model){
+    public String admin(Model model) {
         model.addAttribute("user", getUsername());
         model.addAttribute("role", getAuthority());
         return "admin";
     }
 
     @RequestMapping(value = "accessDenied")
-    public String accessDenied(Model model){
+    public String accessDenied(Model model) {
         model.addAttribute("user", getUsername());
         model.addAttribute("role", getAuthority());
         return "accessDenied";
     }
 
     @RequestMapping(value = "logout")
-    public String logoutHandle(HttpServletRequest request, HttpServletResponse response){
+    public String logoutHandle(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null){
+        if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
         return "redirect:/login?logout";
@@ -74,7 +65,7 @@ public class AppController {
     private String getAuthority() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = new ArrayList<String>();
-        for (GrantedAuthority a : authentication.getAuthorities()){
+        for (GrantedAuthority a : authentication.getAuthorities()) {
             roles.add(a.getAuthority());
         }
 

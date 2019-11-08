@@ -26,6 +26,7 @@
 .chart-circle {
   display: flex;
   justify-content: center;
+
   .circles-text {
     font-size: 28px !important;
   }
@@ -45,6 +46,7 @@
   display: block;
   position: relative;
   width: 100%;
+
   &:before {
     display: block;
     float: left;
@@ -53,11 +55,13 @@
     height: 0;
     padding-bottom: 75%;
   }
+
   &:after {
     content: "";
     display: table;
     clear: both;
   }
+
   svg {
     display: block;
     position: absolute;

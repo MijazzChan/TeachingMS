@@ -8,11 +8,13 @@
   -moz-box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
   box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
   border: 1px solid #eee;
+
   .card-header {
     padding: 15px 15px;
     background-color: $transparent-bg;
     border-bottom: 1px solid #ebedf2 !important;
   }
+
   .card-title {
     margin: 0;
     color: $body-text-color;
@@ -20,6 +22,7 @@
     font-weight: $font-weight-bold;
     line-height: 1.6;
   }
+
   .card-sub {
     display: block;
     margin: 5px 0 10px 0;
@@ -29,6 +32,7 @@
     padding: 0.85rem 1.5rem;
     border-radius: 4px;
   }
+
   .card-category {
     margin-top: 5px;
     font-size: 14px;
@@ -36,21 +40,25 @@
     color: #9A9A9A;
     margin-bottom: 0px;
   }
+
   label {
     font-size: 14px;
     font-weight: $font-weight-normal;
     color: #9A9A9A;
     margin-bottom: 0px;
   }
+
   .card-body {
     padding: 15px 15px 10px 15px;
   }
+
   .card-footer {
     background-color: $transparent-bg;
     line-height: 30px;
     border-top: 1px solid #ebedf2 !important;
     font-size: 14px;
   }
+
   .card-action {
     padding: 30px;
     background-color: $transparent-bg;
@@ -58,11 +66,13 @@
     border-top: 1px solid #ebedf2 !important;
     font-size: 14px;
   }
+
   .card-footer {
     hr {
       margin-top: 5px;
       margin-bottom: 5px;
     }
+
     .legend {
       display: inline-block;
     }
@@ -73,6 +83,7 @@
   .card-category {
     margin-top: 0px;
   }
+
   .icon-big {
     font-size: 3em;
     min-height: 64px;
@@ -85,28 +96,35 @@
       border-top: 1px solid #f4f4f4;
       background: #fafafa !important;
     }
+
     .form-check {
       padding: 0 0 0 0.75rem !important;
+
       label {
         margin-bottom: 0px !important;
       }
     }
+
     tbody td:first-child, thead th:first-child {
       padding-left: 15px;
       padding-right: 15px;
     }
+
     tbody td:last-child, thead th:last-child {
       padding-right: 15px;
     }
   }
+
   .card-body .table td {
     font-size: 14px;
     line-height: 1.8;
+
     .btn {
       font-size: 17px;
       opacity: 0.7;
       transition: all .3s;
     }
+
     &:hover .btn {
       opacity: 1;
     }
@@ -174,12 +192,14 @@
   padding-top: 30px;
   padding-bottom: 30px;
   position: relative;
+
   .card {
     margin-bottom: 0px;
     border-width: 0px;
     box-shadow: none;
     position: unset;
   }
+
   [class*=col-] .card:after {
     position: absolute;
     height: calc(100%);
@@ -187,6 +207,7 @@
     background: #eee;
     content: '';
     right: 0px;
+
     &:last-child {
       width: 0px;
     }

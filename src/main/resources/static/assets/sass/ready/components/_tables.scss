@@ -2,25 +2,30 @@
 
 .table {
   color: #555 !important;
+
   > {
     thead > tr > th, tbody > tr > th, tfoot > tr > th, thead > tr > td, tbody > tr > td, tfoot > tr > td {
       vertical-align: middle;
     }
+
     tbody > tr > {
       td, th {
         padding: 8px;
       }
     }
+
     tfoot > tr > {
       td, th {
         padding: 8px;
       }
     }
   }
+
   thead th {
     color: #554;
     border-bottom-width: 2px;
   }
+
   td, th {
     font-size: 14px;
     border-color: #ebedf2 !important;

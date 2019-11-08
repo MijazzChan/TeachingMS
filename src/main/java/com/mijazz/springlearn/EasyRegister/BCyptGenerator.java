@@ -6,6 +6,6 @@ public class BCyptGenerator {
     public static void main(String[] args) {
         BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
         System.out.println(bCryptPasswordEncoder.encode("admin"));
-        System.out.println(bCryptPasswordEncoder.encode("user"));
+        System.out.println(bCryptPasswordEncoder.encode("8808"));
     }
 }

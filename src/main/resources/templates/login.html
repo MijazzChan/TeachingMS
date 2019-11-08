@@ -1,7 +1,7 @@
 <html lang="zh-CN"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+>
 <head>
     <meta charset="UTF-8">
     <title>教学管理系统入口</title>
@@ -9,39 +9,39 @@
     <link rel="stylesheet" th:href="@{css/font-awesome-4.7.0/css/font-awesome.min.css}">
     <link rel="stylesheet" th:href="@{css/index_style.css}">
 </head>
-<body th:background="@{https://s2.ax1x.com/2019/11/06/MPOHPA.jpg}">
+<body>
 <script>
     function onclickLogin() {
         var loginname = $("#loginname");
         var password = $("#password");
         var msg = "";
-        if(loginname.val() == ""){
+        if (loginname.val() == "") {
             msg = "登录名称不能为空!";
             loginname.focus();
-        }else if(password.val() == ""){
+        } else if (password.val() == "") {
             msg = "密码不能为空!";
             password.focus();
         }
-        if(msg != ""){
+        if (msg != "") {
             alert(msg);
             return false;
-        }else {
+        } else {
             $("#loginForm").submit();
         }
     }
 </script>
 <div class="materialContainer">
-    <form id="loginForm" th:action="@{/login}" method="post" >
+    <form id="loginForm" method="post" th:action="@{/login}">
         <div class="box">
             <div class="title">教学管理系统</div>
             <div class="input">
                 <label for="loginname">用户名/UserID</label>
-                <input type="text" name="loginname" id="loginname">
+                <input id="loginname" name="loginname" type="text">
                 <span class="spin"></span>
             </div>
             <div class="input">
                 <label for="password">密码/Passcode</label>
-                <input type="password" name="password" id="password">
+                <input id="password" name="password" type="password">
                 <span class="spin"></span>
             </div>
             <div class="button login">
@@ -66,17 +66,17 @@
         <div class="title">注册/Register</div>
         <div class="input">
             <label for="regname">用户名/UserID</label>
-            <input type="text" name="regname" id="regname">
+            <input id="regname" name="regname" type="text">
             <span class="spin"></span>
         </div>
         <div class="input">
             <label for="regpass">密码/Passcode</label>
-            <input type="password" name="regpass" id="regpass">
+            <input id="regpass" name="regpass" type="password">
             <span class="spin"></span>
         </div>
         <div class="input">
-            <label for="reregpass" >确认密码/Re-enter Passcode</label>
-            <input type="password" name="reregpass" id="reregpass">
+            <label for="reregpass">确认密码/Re-enter Passcode</label>
+            <input id="reregpass" name="reregpass" type="password">
             <span class="spin"></span>
         </div>
         <div class="button">

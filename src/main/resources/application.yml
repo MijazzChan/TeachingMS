@@ -14,11 +14,11 @@ spring:
     password: coursePassCode
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
-      hibernate:
-        ddl-auto: update
-      show-sql: true
-      database: mysql
-      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   main:
     allow-bean-definition-overriding: true
 

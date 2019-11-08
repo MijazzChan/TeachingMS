@@ -4,8 +4,10 @@
     [class*=col-] .card:after {
       width: 0px !important;
     }
+
     .card {
       border-bottom-width: 1px;
+
       &:last-child {
         border-bottom-width: 0px;
       }
@@ -22,6 +24,7 @@
       opacity: 0;
       transition: all .2s;
     }
+
     &:hover .scroll-element {
       opacity: 1;
     }
@@ -52,6 +55,7 @@
   }
   .nav_open {
     overflow: hidden !important;
+
     .main-panel, .main-header {
       -webkit-transform: translate3d(260px, 0, 0);
       -moz-transform: translate3d(260px, 0, 0);
@@ -66,6 +70,7 @@
   .main-panel {
     width: 100%;
     transition: all .5s;
+
     .content {
       padding: 30px 10px;
     }
@@ -76,6 +81,7 @@
     text-align: left;
     position: relative;
     justify-content: center;
+
     .navbar-toggler {
       position: absolute;
       top: auto;
@@ -83,6 +89,7 @@
       left: 15px;
       opacity: 1;
     }
+
     .more {
       opacity: 1;
       position: absolute;
@@ -109,6 +116,7 @@
       transform: translate3d(0, 54px, 0) !important;
       border-bottom: 1px solid #eee;
     }
+
     .main-panel {
       transform: translate3d(0, 125px, 0) !important;
     }
@@ -124,9 +132,11 @@
     margin-top: 10px;
     margin-bottom: 10px;
     position: relative;
+
     .dropdown {
       position: unset;
     }
+
     .dropdown-menu {
       position: absolute;
       left: 0;
