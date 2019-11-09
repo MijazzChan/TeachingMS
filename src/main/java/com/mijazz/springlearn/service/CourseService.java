@@ -44,4 +44,9 @@ public class CourseService {
     public void update(Course course) {
         courseRepository.updatecourse(course.getCourseid(), course.getCoursename(), course.getCoursetime(), course.getCourseplace());
     }
+
+    @Transactional
+    public long count(){
+        return courseRepository.count();
+    }
 }

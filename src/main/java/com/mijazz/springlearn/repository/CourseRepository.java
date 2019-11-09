@@ -13,4 +13,7 @@ public interface CourseRepository extends JpaRepository<Course, Long> {
                       @Param("coursename") String coursename,
                       @Param("coursetime") String coursetime,
                       @Param("courseplace") String courseplace);
+
+    @Override
+    long count();
 }

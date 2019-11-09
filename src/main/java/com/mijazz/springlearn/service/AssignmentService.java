@@ -26,4 +26,9 @@ public class AssignmentService {
     public Iterable<Assignment> getbyproperty(String property) {
         return assignmentRepository.findByAsproperty(property);
     }
+
+    @Transactional
+    public long count(){
+        return assignmentRepository.count();
+    }
 }

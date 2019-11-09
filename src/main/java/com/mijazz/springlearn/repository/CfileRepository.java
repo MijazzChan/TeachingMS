@@ -5,4 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CfileRepository extends JpaRepository<Cfile, Long> {
     Iterable<Cfile> findByCfileproperty(String property);
+
+    @Override
+    long count();
 }

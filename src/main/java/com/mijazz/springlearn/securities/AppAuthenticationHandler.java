@@ -48,7 +48,7 @@ public class AppAuthenticationHandler extends SimpleUrlAuthenticationSuccessHand
         }
 
         if (isAdmin(roles)) {
-            target = "/admin";
+            target = "/admin/index";
         } else if (isUser(roles)) {
             target = "/home/index";
         }

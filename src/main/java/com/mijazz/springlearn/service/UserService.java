@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,11 @@ public class UserService implements UserDetailsService {
         System.out.println(user.getPassword());
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
+    }
+
+    @Transactional
+    public long count(){
+        return userRepository.count();
     }
 
     @Override

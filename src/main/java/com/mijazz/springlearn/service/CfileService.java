@@ -32,4 +32,9 @@ public class CfileService {
     public Iterable<Cfile> getbyproperty(String property) {
         return cfileRepository.findByCfileproperty(property);
     }
+
+    @Transactional
+    public long count() {
+        return cfileRepository.count();
+    }
 }
