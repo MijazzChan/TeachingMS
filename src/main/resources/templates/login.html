@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <title>教学管理系统入口</title>
 
-    <link rel="stylesheet" th:href="@{css/font-awesome-4.7.0/css/font-awesome.min.css}">
-    <link rel="stylesheet" th:href="@{css/index_style.css}">
+    <link rel="stylesheet" th:href="@{/assets/font-awesome-4.7.0/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/index_style.css}">
 </head>
-<body>
+<body th:background="@{/assets/img/bg.jpg}">
 <script>
     function onclickLogin() {
         var loginname = $("#loginname");
@@ -59,7 +59,7 @@
         </div>
     </form>
 
-    <div class="overbox">
+    <!-- div class="overbox">
         <div class="material-button alt-2">
             <span class="shape"></span>
         </div>
@@ -84,12 +84,12 @@
                 <span>注册</span>
             </button>
         </div>
-    </div>
+    </div-->
 
 </div>
 
-<script th:src="@{js/jquery.min.js}"></script>
-<script th:src="@{js/index.js}"></script>
+<script th:src="@{/assets/js/jquery.min.js}"></script>
+<script th:src="@{/assets/js/index.js}"></script>
 </form>
 </body>
 </html>

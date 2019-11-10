@@ -28,7 +28,7 @@ public class AssignmentService {
     }
 
     @Transactional
-    public long count(){
+    public long count() {
         return assignmentRepository.count();
     }
 }

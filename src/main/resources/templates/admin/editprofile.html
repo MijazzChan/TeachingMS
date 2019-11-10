@@ -8,7 +8,7 @@
     <!-- default header name is X-CSRF-TOKEN -->
     <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-    <title>课程管理-现代教学管理系统-管理员</title>
+    <title>修改资料-现代教学管理系统-管理员</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
@@ -83,7 +83,7 @@
                 <li class="nav-item">
                     <a href="/admin/coursefile?property=all">
                         <i class="la la-cloud"></i>
-                        <p>课件上载</p>
+                        <p>课件下载</p>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -110,42 +110,80 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <h4 class="page-title">课程管理</h4>
+                <h4 class="page-title">修改信息</h4>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="card">
                             <div class="card-body">
-                                <table class="table table-hover" id="table-course">
-                                    <thead>
-                                    <tr>
-                                        <th class="col">课程名称</th>
-                                        <th class="col">课程编号</th>
-                                        <th class="col">上课时间</th>
-                                        <th class="col">上课地点</th>
-                                        <th class="col">操作</th>
-                                    </tr>
-                                    </thead>
+                                <table class="table table-typo">
                                     <tbody>
-                                    <tr th:each="course:${courses}">
-                                        <td th:text="${course.getCoursename()}"></td>
-                                        <td th:text="${course.getCourseid()}"></td>
-                                        <td th:text="${course.getCoursetime()}"></td>
-                                        <td th:text="${course.getCourseplace()}"></td>
+                                    <tr>
                                         <td>
-                                            <button class="btn btn-round btn-danger" onclick="deletecourse(this.id)"
-                                                    th:id="${course.getCourseid()}">删除
-                                            </button>
+                                            <p>用户名</p>
+                                        </td>
+                                        <td>
+                                            <span class="h5 text-primary" id="usernameorigin"
+                                                  th:text="${user.getUsername()}"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>工号</p>
+                                        </td>
+                                        <td>
+                                            <span class="h5 text-primary" th:text="${user.getStudentno()}"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>所属</p>
+                                        </td>
+                                        <td>
+                                            <span class="h5 text-primary" th:text="${user.getGradeclass()}"></span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>密码</p>
+                                        </td>
+                                        <td>
+                                            <span class="h5 text-primary">*******</span>
                                         </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="usernamepillinput">用户名</label>
+                                    <input class="form-control input-pill" id="usernamepillinput" placeholder="用户名"
+                                           type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordinput">新密码</label>
+                                    <input class="form-control input-pill" id="passwordinput" placeholder="新密码"
+                                           type="password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="passwordreinput">确认密码</label>
+                                    <input class="form-control input-pill" id="passwordreinput" placeholder="确认密码"
+                                           type="password">
+                                </div>
+                            </div>
                             <div class="card-action">
-                                <button class="btn btn-round btn-primary" onclick="addcourse()">新增</button>
+                                <button class="btn btn-success" onclick="readyajax()">提交</button>
+                                <button class="btn btn-danger" onclick="cleanform()">重置</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
         </div>
         <footer class="footer">
@@ -196,14 +234,35 @@
     $(document).ajaxSend(function (e, xhr, options) {
         xhr.setRequestHeader(header, token);
     });
-    var flag = false;
 
-    function deletecourse(btnid) {
+    function readyajax() {
+        var username = $("#usernamepillinput").val();
+        if (username == "" || username == null) {
+            alert("用户名不能为空");
+            return;
+        }
+        var password = $("#passwordinput").val();
+        var comfirmpwd = $("#passwordreinput").val();
+        if (password != comfirmpwd) {
+            alert("两次密码不一致");
+        } else {
+            submitform(username, comfirmpwd);
+        }
+    }
+
+
+    function cleanform() {
+        $("#usernamepillinput").value = $("#usernameorigin").innerText;
+        $("#passwordinput").value = "";
+        $("#passwordreinput").value = "";
+    }
+
+    function submitform(username, password) {
         var jsondata = {
-            "courseid": btnid,
-            "coursename": "-delete-"
+            "username": username,
+            "password": password
         };
-        $.ajax("/admin/coursemanage", {
+        $.ajax("/admin/editprofile", {
             dataType: "text",
             type: "post",
             contentType: "application/json",
@@ -217,85 +276,7 @@
             }
         })
     }
-
-    function addcourse() {
-        if (flag == true) {
-            return;
-        }
-        var tr = document.createElement("tr");
-        var td1 = document.createElement("td");
-        var td2 = document.createElement("td");
-        var td3 = document.createElement("td");
-        var td4 = document.createElement("td");
-        var td5 = document.createElement("td");
-        var input1 = document.createElement("input");
-        var input2 = document.createElement("input");
-        var input3 = document.createElement("input");
-        var input4 = document.createElement("input");
-        var btn = document.createElement("button");
-        input1.setAttribute("type", "text");
-        input1.setAttribute("class", "form-control input-pill");
-        input1.setAttribute("id", "cnameinput");
-        input1.setAttribute("placeholder", "课程名称");
-        input2.setAttribute("type", "text");
-        input2.setAttribute("class", "form-control input-pill");
-        input2.setAttribute("id", "cidinput");
-        input2.setAttribute("placeholder", "id");
-        input3.setAttribute("type", "text");
-        input3.setAttribute("class", "form-control input-pill");
-        input3.setAttribute("id", "ctimeinput");
-        input3.setAttribute("placeholder", "time");
-        input4.setAttribute("type", "text");
-        input4.setAttribute("class", "form-control input-pill");
-        input4.setAttribute("id", "cplaceinput");
-        input4.setAttribute("placeholder", "place");
-        btn.setAttribute("class", "btn btn-round btn-success");
-        btn.setAttribute("onclick", "addgo()");
-        btn.innerHTML = "提交";
-        td1.appendChild(input1);
-        td2.appendChild(input2);
-        td3.appendChild(input3);
-        td4.appendChild(input4);
-        td5.appendChild(btn);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        tr.appendChild(td3);
-        tr.appendChild(td4);
-        tr.appendChild(td5);
-        document.getElementById("table-course").appendChild(tr);
-        flag = true;
-    }
-
-    function addgo() {
-        var cname = $("#cnameinput").val();
-        var cid = $("#cidinput").val();
-        var ctime = $("#ctimeinput").val();
-        var cplace = $("#cplaceinput").val();
-        if (cname.length == 0 || cid.length == 0) {
-            alert("非法输入");
-            return;
-        }
-        var jsondata = {
-            "coursename": cname,
-            "courseid": cid,
-            "coursetime": ctime,
-            "courseplace": cplace
-        };
-        $.ajax("/admin/coursemanage", {
-            dataType: "text",
-            type: "post",
-            contentType: "application/json",
-            data: JSON.stringify(jsondata),
-            async: true,
-            success: function (data) {
-                alert(data);
-                window.location.href = "/admin/coursemanage";
-            },
-            error: function () {
-                alert("服务器错误");
-            }
-        })
-    }
-
 </script>
 </html>
+
+

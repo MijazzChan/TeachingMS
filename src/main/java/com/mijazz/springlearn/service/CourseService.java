@@ -46,7 +46,7 @@ public class CourseService {
     }
 
     @Transactional
-    public long count(){
+    public long count() {
         return courseRepository.count();
     }
 }

@@ -5,12 +5,31 @@ import javax.persistence.*;
 @Entity
 @Table(name = "tb_studenthw")
 public class Studenthw {
-    public Studenthw(String hwpath, String hwowner, String hwsubmitdate, long hwproperty){
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(name = "hwpath")
+    private String hwpath;
+    @Column(name = "hwproperty")
+    private long hwproperty;
+    @Column(name = "hwpropertyname")
+    private String hwpropertyname;
+    @Column(name = "hwsubmitdate")
+    private String hwsubmitdate;
+    @Column(name = "hwowner")
+    private String hwowner;
+
+    public Studenthw() {
+
+    }
+
+    public Studenthw(String hwpath, String hwowner, String hwsubmitdate, long hwproperty) {
         this.hwpath = hwpath;
         this.hwowner = hwowner;
         this.hwsubmitdate = hwsubmitdate;
         this.hwproperty = hwproperty;
     }
+
     public long getId() {
         return id;
     }
@@ -58,23 +77,4 @@ public class Studenthw {
     public void setHwowner(String hwowner) {
         this.hwowner = hwowner;
     }
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "hwpath")
-    private String hwpath;
-
-    @Column(name = "hwproperty")
-    private long hwproperty;
-
-    @Column(name = "hwpropertyname")
-    private String hwpropertyname;
-
-    @Column(name = "hwsubmitdate")
-    private String hwsubmitdate;
-
-    @Column(name = "hwowner")
-    private String hwowner;
 }

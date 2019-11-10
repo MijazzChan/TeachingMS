@@ -4,8 +4,11 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-    <title>课件-现代教学管理系统</title>
+    <title>课件上载-现代教学管理系统-管理员</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
@@ -18,14 +21,14 @@
 <script>
     function buttonsearch() {
         var temp = document.getElementById("propertyselect").value;
-        var target = "/home/coursefile?property=" + temp;
+        var target = "/admin/coursefile?property=" + temp;
         window.location.href = target;
     }
 </script>
 <div class="wrapper">
     <div class="main-header">
         <div class="logo-header">
-            <a class="logo" href="/home/index">
+            <a class="logo" href="/admin/index">
                 现代教学管理系统
             </a>
             <button aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation"
@@ -47,7 +50,7 @@
 								<span>
 									<span th:text="${user}"></span>
 									<span class="user-level">
-										<span>学生</span>
+										<span>管理员</span>
 									</span>
 									<span class="caret"></span>
 								</span>
@@ -57,14 +60,20 @@
                     <div aria-expanded="true" class="collapse in" id="collapseExample" style="">
                         <ul class="nav">
                             <li>
-                                <a href="/home/myprofile">
+                                <a href="/admin/myprofile">
                                     <span class="link-collapse">个人信息</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="/home/editprofile">
+                                <a href="/admin/editprofile">
                                     <span class="link-collapse">修改信息</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/usermanage">
+                                    <span class="link-collapse">学生管理</span>
                                 </a>
                             </li>
                         </ul>
@@ -72,25 +81,30 @@
                 </div>
             </div>
             <ul class="nav">
-                <li class="nav-item active">
-                    <a href="/home/index">
+                <li class="nav-item">
+                    <a href="/admin/coursemanage">
                         <i class="la la-dashboard"></i>
-                        <p>课程表</p>
+                        <p>课程管理</p>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a href="/home/coursefile?property=all">
                         <i class="la la-cloud"></i>
-                        <p>课件下载</p>
+                        <p>课件上载</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/home/assignment?property=all">
+                    <a href="/admin/assignment?property=all">
                         <i class="la la-keyboard-o"></i>
-                        <p>作业</p>
+                        <p>作业下发</p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="tables.html">
+                        <i class="la la-th"></i>
+                        <p>作业批改</p>
+                    </a>
+                </li>
                 <a class="nav-item update-pro" href="/logout">
                     <button data-target="/logout" data-toggle="modal">
                         <i class="la la-hand-pointer-o"></i>
@@ -116,7 +130,7 @@
                             </div>
                         </div>
                         <div class="card-body">
-                            <table class="table table-hover">
+                            <table class="table table-hover" id="table-coursefile">
                                 <thead>
                                 <tr>
                                     <th class="col">课件名</th>
@@ -137,8 +151,10 @@
                             </table>
                         </div>
                         <div class="card-action">
-                            <button class="btn btn-primary btn-lg btn-round" id="searchbtn" onclick="buttonsearch()"
-                                    style="align-items: center">检索
+                            <button class="btn btn-primary btn-lg btn-round" id="searchbtn" onclick="buttonsearch()">
+                                检索
+                            </button>
+                            <button class="btn btn-lg btn-success btn-round" id="addbtn" onclick="addcfile()">上传
                             </button>
                         </div>
                     </div>
@@ -173,6 +189,7 @@
     </div>
 </div>
 </div>
+<input hidden="hidden" id="cfile" onchange="ajaxgo()" type="file">
 </body>
 <script th:src="@{/assets/js/core/jquery.3.2.1.min.js}"></script>
 <script th:src="@{/assets/js/plugin/jquery-ui-1.12.1.custom/jquery-ui.min.js}"></script>
@@ -189,5 +206,86 @@
 <script th:src="@{/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js}"></script>
 <script th:src="@{/assets/js/ready.min.js}"></script>
 <script th:src="@{/assets/js/demo.js}"></script>
+<script type="text/javascript">
+    var token = $("meta[name='_csrf']").attr("content");
+    var header = $("meta[name='_csrf_header']").attr("content");
+    $(document).ajaxSend(function (e, xhr, options) {
+        xhr.setRequestHeader(header, token);
+    });
+    var flag = false;
 
+    function addcfile() {
+        if (flag == true) {
+            return;
+        }
+        var tr = document.createElement("tr");
+        var td1 = document.createElement("td");
+        var td2 = document.createElement("td");
+        var td3 = document.createElement("td");
+        var td4 = document.createElement("td");
+        var input1 = document.createElement("input");
+        var input2 = document.createElement("input");
+        var input3 = document.createElement("input");
+        var btn = document.createElement("button");
+        input1.setAttribute("type", "text");
+        input1.setAttribute("class", "form-control input-pill");
+        input1.setAttribute("id", "cfilenameinput");
+        input1.setAttribute("placeholder", "课件名");
+        input2.setAttribute("type", "text");
+        input2.setAttribute("class", "form-control input-pill");
+        input2.setAttribute("id", "cfileidinput");
+        input2.setAttribute("placeholder", "id");
+        input3.setAttribute("type", "text");
+        input3.setAttribute("class", "form-control input-pill");
+        input3.setAttribute("id", "cfilepropertyinput");
+        input3.setAttribute("placeholder", "property");
+        btn.setAttribute("class", "btn btn-round btn-info");
+        btn.setAttribute("onclick", "selectfile()");
+        btn.innerHTML = "选择文件";
+        td1.appendChild(input1);
+        td2.appendChild(input2);
+        td3.appendChild(input3);
+        td4.appendChild(btn);
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        document.getElementById("table-coursefile").appendChild(tr);
+        flag = true;
+    }
+
+    function selectfile() {
+        $("#cfile").click();
+    }
+
+    function ajaxgo() {
+        var file = document.getElementById("cfile").files[0];
+        var cfilename = $("#cfilenameinput").val().toString();
+        var cfileproperty = $("#cfilepropertyinput").val().toString();
+        if (cfilename.length == 0 || cfileproperty.length == 0) {
+            alert("非法请求");
+            return;
+        }
+        var form = new FormData();
+        form.append("cfilename", cfilename);
+        form.append("cfileproperty", cfileproperty);
+        form.append("file", file);
+        $.ajax("/admin/coursefile", {
+            dataType: "text",
+            type: "post",
+            data: form,
+            async: true,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                alert(data);
+                window.location.href = "/admin/coursefile?property=all";
+            },
+            error: function () {
+                alert("服务器错误");
+            }
+        });
+    }
+
+</script>
 </html>

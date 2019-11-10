@@ -18,6 +18,16 @@ public class Cfile {
     @Column(name = "cfileproperty")
     private String cfileproperty;
 
+    public Cfile(String cfilename, String cfileproperty, String cfilepath) {
+        this.cfilename = cfilename;
+        this.cfileproperty = cfileproperty;
+        this.cfilepath = cfilepath;
+    }
+
+    public Cfile() {
+
+    }
+
     public long getCfileid() {
         return cfileid;
     }

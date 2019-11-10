@@ -13,27 +13,27 @@ public class StudenthwService {
     StudenthwRepository studenthwRepository;
 
     @Transactional
-    public void save(Studenthw studenthw){
+    public void save(Studenthw studenthw) {
         studenthwRepository.save(studenthw);
     }
 
     @Transactional
-    public Iterable<Studenthw> getall(){
+    public Iterable<Studenthw> getall() {
         return studenthwRepository.findAll();
     }
 
     @Transactional
-    public Iterable<Studenthw> getbyloginname(String loginname){
+    public Iterable<Studenthw> getbyloginname(String loginname) {
         return studenthwRepository.findByHwowner(loginname);
     }
 
     @Transactional
-    public Iterable<Studenthw> getbypropertyid(long id){
+    public Iterable<Studenthw> getbypropertyid(long id) {
         return studenthwRepository.findByHwpropertyOrderByHwsubmitdateDesc(id);
     }
 
     @Transactional
-    public Iterable<Studenthw> getbyproperty(String property){
+    public Iterable<Studenthw> getbyproperty(String property) {
         return studenthwRepository.findByHwpropertynameOrderByHwsubmitdateDesc(property);
     }
 

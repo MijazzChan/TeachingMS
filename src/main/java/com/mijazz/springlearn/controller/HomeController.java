@@ -38,6 +38,16 @@ public class HomeController {
     @Resource
     private StudenthwService studenthwService;
 
+    public static String getRandomname(int length) {
+        String str = "0123456789";
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int random = (int) (Math.random() * 10);
+            sb.append(str.charAt(random));
+        }
+        return sb.toString();
+    }
+
     @RequestMapping(value = "/home/index")
     public String homeindex(Model model) {
         model.addAttribute("user", getUsername());
@@ -125,7 +135,6 @@ public class HomeController {
         return "修改成功";
     }
 
-
     private String getAuthority() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = new ArrayList<String>();
@@ -139,15 +148,5 @@ public class HomeController {
     private String getUsername() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         return username;
-    }
-
-    public static String getRandomname(int length) {
-        String str = "0123456789";
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < length; i++) {
-            int random = (int) (Math.random() * 10);
-            sb.append(str.charAt(random));
-        }
-        return sb.toString();
     }
 }

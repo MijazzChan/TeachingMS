@@ -34,7 +34,7 @@ public class UserService implements UserDetailsService {
     }
 
     @Transactional
-    public long count(){
+    public long count() {
         return userRepository.count();
     }
 

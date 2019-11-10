@@ -28,7 +28,7 @@
 <div class="wrapper">
     <div class="main-header">
         <div class="logo-header">
-            <a class="logo" href="#">
+            <a class="logo" href="/home/index">
                 现代教学管理系统
             </a>
             <button aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation"
@@ -75,7 +75,7 @@
                 </div>
             </div>
             <ul class="nav">
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="/home/index">
                         <i class="la la-dashboard"></i>
                         <p>课程表</p>
@@ -85,43 +85,15 @@
                     <a href="/home/coursefile?property=all">
                         <i class="la la-cloud"></i>
                         <p>课件下载</p>
-                        <span class="badge badge-count"></span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a href="/home/assignment?property=all">
                         <i class="la la-keyboard-o"></i>
                         <p>作业</p>
-                        <span class="badge badge-count"></span>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="tables.html">
-                        <i class="la la-th"></i>
-                        <p>Tables</p>
-                        <span class="badge badge-count">6</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="notifications.html">
-                        <i class="la la-bell"></i>
-                        <p>Notifications</p>
-                        <span class="badge badge-success">3</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="typography.html">
-                        <i class="la la-font"></i>
-                        <p>Typography</p>
-                        <span class="badge badge-danger">25</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="icons.html">
-                        <i class="la la-fonticons"></i>
-                        <p>Icons</p>
-                    </a>
-                </li>
+
                 <a class="nav-item update-pro" href="/logout">
                     <button data-target="/logout" data-toggle="modal">
                         <i class="la la-hand-pointer-o"></i>
@@ -148,7 +120,8 @@
                             </div>
                             <div class="card-action">
                                 <a class="btn btn-default btn-round" th:href="${unit.getAsdetail()}">作业描述</a>
-                                <input class="btn btn-info btn-round" th:id="${unit.getId()}" type="file" onchange="uploadAssignment(this)">作业上传</input>
+                                <input class="btn btn-info btn-round" onchange="uploadAssignment(this)" th:id="${unit.getId()}"
+                                       type="file">作业上传</input>
                                 <button class="btn btn-success" th:text="${unit.getAsdate()}"></button>
                                 <button class="btn btn-danger" th:text="${unit.getAsdeadline()}"></button>
                             </div>

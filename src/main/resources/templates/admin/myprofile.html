@@ -4,8 +4,11 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-    <title>课件-现代教学管理系统</title>
+    <title>课程管理-现代教学管理系统-管理员</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
@@ -15,17 +18,10 @@
     <link rel="stylesheet" th:href="@{/assets/css/demo.css}">
 </head>
 <body>
-<script>
-    function buttonsearch() {
-        var temp = document.getElementById("propertyselect").value;
-        var target = "/home/coursefile?property=" + temp;
-        window.location.href = target;
-    }
-</script>
 <div class="wrapper">
     <div class="main-header">
         <div class="logo-header">
-            <a class="logo" href="/home/index">
+            <a class="logo" href="/admin/index">
                 现代教学管理系统
             </a>
             <button aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation"
@@ -47,7 +43,7 @@
 								<span>
 									<span th:text="${user}"></span>
 									<span class="user-level">
-										<span>学生</span>
+										<span>管理员</span>
 									</span>
 									<span class="caret"></span>
 								</span>
@@ -57,14 +53,20 @@
                     <div aria-expanded="true" class="collapse in" id="collapseExample" style="">
                         <ul class="nav">
                             <li>
-                                <a href="/home/myprofile">
+                                <a href="/admin/myprofile">
                                     <span class="link-collapse">个人信息</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="/home/editprofile">
+                                <a href="/admin/editprofile">
                                     <span class="link-collapse">修改信息</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/usermanage">
+                                    <span class="link-collapse">学生管理</span>
                                 </a>
                             </li>
                         </ul>
@@ -73,21 +75,27 @@
             </div>
             <ul class="nav">
                 <li class="nav-item active">
-                    <a href="/home/index">
+                    <a href="/admin/coursemanage">
                         <i class="la la-dashboard"></i>
-                        <p>课程表</p>
+                        <p>课程管理</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/home/coursefile?property=all">
+                    <a href="/admin/coursefile?property=all">
                         <i class="la la-cloud"></i>
-                        <p>课件下载</p>
+                        <p>课件上载</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/home/assignment?property=all">
+                    <a href="/admin/assignment?property=all">
                         <i class="la la-keyboard-o"></i>
-                        <p>作业</p>
+                        <p>作业下发</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="tables.html">
+                        <i class="la la-th"></i>
+                        <p>作业批改</p>
                     </a>
                 </li>
 
@@ -103,44 +111,45 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <h4 class="page-title">课件列表</h4>
+                <h4 class="page-title">我的信息</h4>
                 <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="form-group">
-                                <label for="propertyselect"></label>
-                                <select class="form-control input-pill" id="propertyselect">
-                                    <option>all</option>
-                                    <option th:each="course:${courses}" th:text="${course.getCoursename()}"></option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="col">课件名</th>
-                                    <th class="col">课件号</th>
-                                    <th class="col">课件归属</th>
-                                    <th class="col">下载</th>
-                                </tr>
-                                </thead>
-                                <tbody id="tablebody">
-                                <tr th:each="cfile:${cfiles}">
-                                    <td th:text="${cfile.getCfilename()}"></td>
-                                    <td th:text="${cfile.getCfileid()}"></td>
-                                    <td th:text="${cfile.getCfileproperty()}"></td>
-                                    <td><a class="btn btn-round btn-success" th:href="${cfile.getCfilepath()}">下载</a>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="card-action">
-                            <button class="btn btn-primary btn-lg btn-round" id="searchbtn" onclick="buttonsearch()"
-                                    style="align-items: center">检索
-                            </button>
-                        </div>
+                    <div class="card-body">
+                        <table class="table table-typo">
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <p>用户名</p>
+                                </td>
+                                <td>
+                                    <span class="h5 text-primary" th:text="${user.getUsername()}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>工号</p>
+                                </td>
+                                <td>
+                                    <span class="h5 text-primary" th:text="${user.getStudentno()}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>所属</p>
+                                </td>
+                                <td>
+                                    <span class="h5 text-primary" th:text="${user.getGradeclass()}"></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>密码</p>
+                                </td>
+                                <td>
+                                    <a class="btn btn-round btn-primary" href="/admin/editprofile">修改密码</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
@@ -191,3 +200,5 @@
 <script th:src="@{/assets/js/demo.js}"></script>
 
 </html>
+
+
