@@ -4,6 +4,9 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <head>
+    <meta name="_csrf" th:content="${_csrf.token}"/>
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <title>Home</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
@@ -50,14 +53,20 @@
                     <div aria-expanded="true" class="collapse in" id="collapseExample" style="">
                         <ul class="nav">
                             <li>
-                                <a href="/home/myprofile">
+                                <a href="/admin/myprofile">
                                     <span class="link-collapse">个人信息</span>
                                 </a>
                             </li>
 
                             <li>
-                                <a href="/home/editprofile">
+                                <a href="/admin/editprofile">
                                     <span class="link-collapse">修改信息</span>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="/admin/usermanage">
+                                    <span class="link-collapse">学生管理</span>
                                 </a>
                             </li>
                         </ul>
@@ -73,17 +82,17 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/home/coursefile?property=all">
+                    <a href="/admin/coursefile?property=all">
                         <i class="la la-cloud"></i>
                         <p>课件下载</p>
-                        <span class="badge badge-count">14</span>
+                        <span class="badge badge-count" th:text="${cfilecount}"></span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="/home/assignment?property=all">
+                    <a href="/admin/assignment?property=all">
                         <i class="la la-keyboard-o"></i>
-                        <p>作业</p>
-                        <span class="badge badge-count"></span>
+                        <p>作业下发</p>
+                        <span class="badge badge-count" th:text="${assignmentcount}"></span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -227,6 +236,38 @@
                                         <td th:text="${course.getCourseid()}"></td>
                                         <td th:text="${course.getCoursetime()}"></td>
                                         <td th:text="${course.getCourseplace()}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">作业概览</h4>
+                            </div>
+                            <div class="card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="col">作业标题</th>
+                                        <th class="col">作业归属</th>
+                                        <th class="col">作业编号</th>
+                                        <th class="col">作业日期</th>
+                                        <th class="col">作业截至</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr th:each="unit:${assignments}">
+                                        <td th:text="${unit.getAstitle()}"></td>
+                                        <td th:text="${unit.getAsproperty()}"></td>
+                                        <td th:text="${unit.getId()}"></td>
+                                        <td th:text="${unit.getAsdate()}"></td>
+                                        <td th:text="${unit.getAsdeadline()}"></td>
                                     </tr>
                                     </tbody>
                                 </table>

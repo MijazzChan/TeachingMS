@@ -39,17 +39,8 @@ public class AppController {
         return "login";
     }
 
-    @RequestMapping(value = "/admin")
-    public String admin(Model model) {
-        model.addAttribute("user", getUsername());
-        model.addAttribute("role", getAuthority());
-        return "admin";
-    }
-
     @RequestMapping(value = "accessDenied")
     public String accessDenied(Model model) {
-        model.addAttribute("user", getUsername());
-        model.addAttribute("role", getAuthority());
         return "accessDenied";
     }
 
