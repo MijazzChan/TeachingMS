@@ -1,9 +1,13 @@
 package com.mijazz.springlearn.controller;
 
+import com.mijazz.springlearn.Configurator.PropertiesPathConfigurator;
 import com.mijazz.springlearn.objects.Course;
 import com.mijazz.springlearn.objects.Studenthw;
 import com.mijazz.springlearn.securities.User;
 import com.mijazz.springlearn.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,20 +27,19 @@ import java.util.List;
 
 @Controller
 public class HomeController {
+    private static final Logger log = LoggerFactory.getLogger(HomeController.class);
     @Resource
     private CourseService courseService;
-
     @Resource
     private CfileService cfileService;
-
     @Resource
     private UserService userService;
-
     @Resource
     private AssignmentService assignmentService;
-
     @Resource
     private StudenthwService studenthwService;
+    @Autowired
+    private PropertiesPathConfigurator pathConfigurator;
 
     public static String getRandomname(int length) {
         String str = "0123456789";
@@ -86,11 +89,13 @@ public class HomeController {
     @ResponseBody
     public String assignmentAjax(@RequestParam("file") MultipartFile multipartFile, @RequestParam("id") String id) throws IOException {
         if (multipartFile.isEmpty()) {
+            log.warn("Empty Request Pass through Spring Security /home/assignment");
             return "非法请求";
         }
         String suffix = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
         String tempName = getRandomname(12);
-        String path = "E:\\SpringWorkspace\\springlearn\\src\\main\\resources\\static\\hwfile";
+//        String path = "E:\\SpringWorkspace\\springlearn\\src\\main\\resources\\static\\hwfile";
+        String path = pathConfigurator.getHwfilepath();
         File file = new File(path, tempName + suffix);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -98,6 +103,7 @@ public class HomeController {
         multipartFile.transferTo(file);
         Studenthw temphw = new Studenthw("/hwfile/" + tempName + suffix, getUsername(), new SimpleDateFormat("yyyyMMdd").format(new Date()), Long.valueOf(id));
         studenthwService.save(temphw);
+        log.info("Assignment file is uploaded via post by " + getUsername() + " in name of " + tempName);
         return "上传成功";
     }
 
@@ -121,9 +127,11 @@ public class HomeController {
     @ResponseBody
     public String editAjax(@RequestBody User user) {
         if (user.getUsername() == null || user.getUsername().trim().length() == 0) {
+            log.warn("Empty Request Pass through Spring Security /home/editprofile");
             return "非法请求";
         }
         if (user.getPassword() == null || user.getPassword().trim().length() == 0) {
+            log.warn("Empty Request Pass through Spring Security /home/editprofile");
             return "非法请求";
         }
         String loginname = getUsername();

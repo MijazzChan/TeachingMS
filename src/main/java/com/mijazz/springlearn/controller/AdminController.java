@@ -1,9 +1,13 @@
 package com.mijazz.springlearn.controller;
 
+import com.mijazz.springlearn.Configurator.PropertiesPathConfigurator;
 import com.mijazz.springlearn.objects.Cfile;
 import com.mijazz.springlearn.objects.Course;
 import com.mijazz.springlearn.securities.User;
 import com.mijazz.springlearn.service.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,20 +25,19 @@ import java.util.List;
 
 @Controller
 public class AdminController {
+    private static final Logger log = LoggerFactory.getLogger(AdminController.class);
     @Resource
     private CourseService courseService;
-
     @Resource
     private CfileService cfileService;
-
     @Resource
     private UserService userService;
-
     @Resource
     private AssignmentService assignmentService;
-
     @Resource
     private StudenthwService studenthwService;
+    @Autowired
+    private PropertiesPathConfigurator pathConfigurator;
 
     public static String getRandomname(int length) {
         String str = "0123456789";
@@ -133,11 +136,13 @@ public class AdminController {
     @ResponseBody
     public String coursefileAjax(@RequestParam("file") MultipartFile multipartFile, @RequestParam("cfilename") String cfilename, @RequestParam("cfileproperty") String property) throws IOException {
         if (multipartFile.isEmpty()) {
+            log.warn("Empty Request Pass through Spring Security /admin/coursefile");
             return "非法请求";
         }
         String suffix = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
         String tempName = getRandomname(12);
-        String path = "E:\\SpringWorkspace\\springlearn\\src\\main\\resources\\static\\cfile";
+//        String path = "E:\\SpringWorkspace\\springlearn\\src\\main\\resources\\static\\cfile";
+        String path = pathConfigurator.getCfilepath();
         File file = new File(path, tempName + suffix);
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -145,7 +150,26 @@ public class AdminController {
         multipartFile.transferTo(file);
         Cfile cfile = new Cfile(cfilename, property, "/cfile/" + tempName + suffix);
         cfileService.save(cfile);
+        log.info("Course file is uploaded via post by " + getUsername() + " in name of " + tempName);
         return "上传成功";
+    }
+
+    @RequestMapping("/admin/readassignment")
+    public String ReadAssignment(Model model) {
+        model.addAttribute("user", getUsername());
+        return "/admin/readassignment";
+    }
+
+    @RequestMapping("/admin/usermanage")
+    public String UserManage(Model model) {
+        model.addAttribute("user", getUsername());
+        return "/admin/usermanage";
+    }
+
+    @RequestMapping("/admin/assignment")
+    public String AssignmentMan(Model model) {
+        model.addAttribute("user", getUsername());
+        return "/admin/assignment";
     }
 
     private String getAuthority() {

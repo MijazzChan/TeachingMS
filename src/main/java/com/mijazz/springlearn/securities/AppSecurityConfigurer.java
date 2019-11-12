@@ -51,10 +51,14 @@ public class AppSecurityConfigurer extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin().loginPage("/login").successHandler(appAuthenticationHandler)
                 .usernameParameter("loginname").passwordParameter("password")
+                .failureUrl("/login?error")
                 .and()
                 .logout().permitAll()
                 .and()
-                .exceptionHandling().accessDeniedPage("/accessDenied");
+                .exceptionHandling().accessDeniedPage("/accessDenied")
+                .and()
+                .csrf().disable();
+
     }
 
     @Override

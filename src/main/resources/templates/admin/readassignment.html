@@ -8,7 +8,7 @@
 <!--    &lt;!&ndash; default header name is X-CSRF-TOKEN &ndash;&gt;-->
 <!--    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
-    <title>课程管理-现代教学管理系统-管理员</title>
+    <title>作业批改-现代教学管理系统-管理员</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
     <link rel="stylesheet" th:href="@{/assets/css/bootstrap.min.css}">
@@ -110,46 +110,11 @@
     <div class="main-panel">
         <div class="content">
             <div class="container-fluid">
-                <h4 class="page-title">我的信息</h4>
+                <h4 class="page-title">Oops, Under Construction</h4>
                 <div class="col-md-12">
-                    <div class="card-body">
-                        <table class="table table-typo">
-                            <tbody>
-                            <tr>
-                                <td>
-                                    <p>用户名</p>
-                                </td>
-                                <td>
-                                    <span class="h5 text-primary" th:text="${user.getUsername()}"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>工号</p>
-                                </td>
-                                <td>
-                                    <span class="h5 text-primary" th:text="${user.getStudentno()}"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>所属</p>
-                                </td>
-                                <td>
-                                    <span class="h5 text-primary" th:text="${user.getGradeclass()}"></span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <p>密码</p>
-                                </td>
-                                <td>
-                                    <a class="btn btn-round btn-primary" href="/admin/editprofile">修改密码</a>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <button class="btn btn-round btn-lg btn-primary" onclick='window.location.href="/admin/index"'>Go
+                        back to Index
+                    </button>
                 </div>
 
 

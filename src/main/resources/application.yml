@@ -2,7 +2,7 @@ spring:
   thymeleaf:
     prefix: classpath:/templates/
     suffix: .html
-    mode: HTML5
+    mode: HTML
     encoding: UTF-8
     servlet:
       content-type: text/html
@@ -26,13 +26,18 @@ spring:
       max-file-size: 100MB
       max-request-size: 100MB
 
-
-
 server:
-  port: 443
-  ssl:
-    key-store: temp.p12
-    key-store-type: PKCS12
-    key-alias: tomcat
-    key-store-password: zstu123
-    enabled: true
+  port: 8084
+#  ssl:
+#    key-store: temp.p12
+#    key-store-type: PKCS12
+#    key-alias: tomcat
+#    key-store-password: zstu123
+#    enabled: true
+
+pathconfigurator:
+  CFilePath: 'E:\SpringWorkspace\springlearn\src\main\resources\static\cfile'
+  HWFilePath: 'E:\SpringWorkspace\springlearn\src\main\resources\static\hwfile'
+logging:
+  file:
+    path: log

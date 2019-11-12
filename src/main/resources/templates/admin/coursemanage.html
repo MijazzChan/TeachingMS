@@ -4,9 +4,9 @@
       xmlns:th="http://www.thymeleaf.org"
 >
 <head>
-    <meta name="_csrf" th:content="${_csrf.token}"/>
-    <!-- default header name is X-CSRF-TOKEN -->
-    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+<!--    <meta name="_csrf" th:content="${_csrf.token}"/>-->
+<!--    &lt;!&ndash; default header name is X-CSRF-TOKEN &ndash;&gt;-->
+<!--    <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible"/>
     <title>课程管理-现代教学管理系统-管理员</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
@@ -93,7 +93,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="tables.html">
+                    <a href="/admin/readassignment">
                         <i class="la la-th"></i>
                         <p>作业批改</p>
                     </a>
@@ -191,11 +191,11 @@
 <script th:src="@{/assets/js/ready.min.js}"></script>
 <script th:src="@{/assets/js/demo.js}"></script>
 <script type="text/javascript">
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content");
-    $(document).ajaxSend(function (e, xhr, options) {
-        xhr.setRequestHeader(header, token);
-    });
+    // var token = $("meta[name='_csrf']").attr("content");
+    // var header = $("meta[name='_csrf_header']").attr("content");
+    // $(document).ajaxSend(function (e, xhr, options) {
+    //     xhr.setRequestHeader(header, token);
+    // });
     var flag = false;
 
     function deletecourse(btnid) {

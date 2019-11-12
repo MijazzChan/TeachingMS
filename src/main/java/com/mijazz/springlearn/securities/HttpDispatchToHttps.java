@@ -5,10 +5,9 @@ import org.apache.catalina.connector.Connector;
 import org.apache.tomcat.util.descriptor.web.SecurityCollection;
 import org.apache.tomcat.util.descriptor.web.SecurityConstraint;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
-import org.springframework.context.annotation.Bean;
 
 public class HttpDispatchToHttps {
-    @Bean
+    //    @Bean
     public Connector connector() {
         Connector connector = new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
@@ -18,7 +17,7 @@ public class HttpDispatchToHttps {
         return connector;
     }
 
-    @Bean
+    //    @Bean
     public TomcatServletWebServerFactory tomcatServletWebServerFactory(Connector connector) {
         TomcatServletWebServerFactory tomcatServletWebServerFactory = new TomcatServletWebServerFactory() {
             @Override

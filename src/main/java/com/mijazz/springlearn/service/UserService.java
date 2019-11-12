@@ -3,6 +3,8 @@ package com.mijazz.springlearn.service;
 import com.mijazz.springlearn.repository.UserRepository;
 import com.mijazz.springlearn.securities.Role;
 import com.mijazz.springlearn.securities.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,6 +21,7 @@ import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
+    private static final Logger log = LoggerFactory.getLogger(UserService.class);
     @Autowired
     @Resource
     UserRepository userRepository;
@@ -31,6 +34,7 @@ public class UserService implements UserDetailsService {
         System.out.println(user.getPassword());
         user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
         userRepository.save(user);
+        log.warn("User Credential has been updated, Name= " + user.getLoginname());
     }
 
     @Transactional
@@ -50,7 +54,7 @@ public class UserService implements UserDetailsService {
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getAuthority()));
         }
-
+        log.info("User Login Via Spring Security, Roles= " + roles.toString() + ", Name= " + loginname);
         return new org.springframework.security.core.userdetails.User(user.getLoginname(), user.getPassword(), authorities);
     }
 }
