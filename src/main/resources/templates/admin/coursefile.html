@@ -88,7 +88,7 @@
                     </a>
                 </li>
                 <li class="nav-item active">
-                    <a href="/home/coursefile?property=all">
+                    <a href="/admin/coursefile?property=all">
                         <i class="la la-cloud"></i>
                         <p>课件上载</p>
                     </a>
@@ -262,7 +262,13 @@
         var file = document.getElementById("cfile").files[0];
         var cfilename = $("#cfilenameinput").val().toString();
         var cfileproperty = $("#cfilepropertyinput").val().toString();
+        if (cfilename == null || cfileproperty == null){
+            alert("请填写文件名与归属");
+            document.getElementById("cfile").files = null;
+            return;
+        }
         if (cfilename.length == 0 || cfileproperty.length == 0) {
+            document.getElementById("cfile").files = null;
             alert("非法请求");
             return;
         }
